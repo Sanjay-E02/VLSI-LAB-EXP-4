@@ -1,42 +1,44 @@
 # VLSI-LAB-EXP-4
-SIMULATION AND IMPLEMENTATION OF SEQUENTIAL LOGIC CIRCUITS
+# SIMULATION AND IMPLEMENTATION OF SEQUENTIAL LOGIC CIRCUITS
 
-AIM: 
+# AIM: 
  To simulate and synthesis SR, JK, T, D - FLIPFLOP, COUNTER DESIGN using Xilinx ISE.
 
-APPARATUS REQUIRED:
+# APPARATUS REQUIRED:
 
 Xilinx 14.7
 Spartan6 FPGA
 
-**LOGIC DIAGRAM**
+# **LOGIC DIAGRAM**:
 
-SR FLIPFLOP
+# SR FLIPFLOP:
 
 ![image](https://github.com/navaneethans/VLSI-LAB-EXP-4/assets/6987778/77fb7f38-5649-4778-a987-8468df9ea3c3)
 
 
-JK FLIPFLOP
+# JK FLIPFLOP:
 
 ![image](https://github.com/navaneethans/VLSI-LAB-EXP-4/assets/6987778/1510e030-4ddc-42b1-88ce-d00f6f0dc7e6)
 
-T FLIPFLOP
+T FLIPFLOP:
 
 ![image](https://github.com/navaneethans/VLSI-LAB-EXP-4/assets/6987778/7a020379-efb1-4104-85ee-439d660baa08)
 
 
-D FLIPFLOP
+# D FLIPFLOP:
 
 ![image](https://github.com/navaneethans/VLSI-LAB-EXP-4/assets/6987778/dda843c5-f0a0-4b51-93a2-eaa4b7fa8aa0)
 
 
-COUNTER
+# COUNTER:
+
+
 
 ![image](https://github.com/navaneethans/VLSI-LAB-EXP-4/assets/6987778/a1fc5f68-aafb-49a1-93d2-779529f525fa)
 
 
   
-PROCEDURE:
+# PROCEDURE:
 STEP:1  Start  the Xilinx navigator, Select and Name the New project.
 STEP:2  Select the device family, device, package and speed.       
 STEP:3  Select new source in the New Project and select Verilog Module as the Source type.                       
@@ -49,13 +51,190 @@ STEP:9  In the Design Object List Window, enter the pin location for each pin in
 STEP:10 Double click on the Implement Design and double click on the Generate Programming File to create a bitstream of the design.(.v) file is converted into .bit file here.
 STEP:11  On the board, by giving required input, the LEDs starts to glow light, indicating the output.
 
-VERILOG CODE
+# VERILOG CODE:
+# SR FLIPFLOP:
+module sr_ff(clk,q,rst,s,r);
 
-   <<< TYPE YOUR VERILOG CODE >>>
+input s,r,clk,rst;
 
-OUTPUT WAVEFORM
- <<< PASTE YOUR OUTPUT WAVEFORM >>>
+output reg q;
 
-RESULT
+always@(posedge clk)
+
+begin
+
+if(rst==1)
+
+q=1'b0;
+
+else
+
+begin
+
+case({s,r})
+
+2'b00:q=q;
+
+2'b01:q=1'b0;
+
+2'b10:q=1'b1;
+
+2'b11:q=1'bx;
+
+endcase
+
+end
+
+end
+
+endmodule
+
+# JK FLIPFLOP:
+module jk_ff(clk,q,rst,j,k);
+
+input j,k,clk,rst;
+
+output reg q;
+
+always@(posedge clk)
+
+begin
+
+if(rst==1)
+
+q=1'b0;
+
+else
+
+begin
+
+case({j,k})
+
+2'b00:q=q;
+
+2'b01:q=1'b0;
+
+2'b10:q=1'b1;
+
+2'b11:q=~q;
+
+endcase
+
+end
+
+end
+
+endmodule
+
+# T FLIPFLOP:
+module t_ff(clk,q,rst,t);
+
+input t,clk,rst;
+
+output reg q;
+
+always@(posedge clk)
+
+begin
+
+if(rst==1)
+
+q=1'b0;
+
+else
+
+if(t==0)
+
+q=q;
+
+else
+
+q=~q;
+
+end
+
+endmodule
+
+# D FLIPFLOP:
+module d_ff(clk,q,rst,d);
+
+input d,clk,rst;
+
+output reg q;
+
+always@(posedge clk)
+
+begin
+
+if(rst==1)
+
+q=1'b0;
+
+else
+
+q=d;
+
+end
+
+endmodule
+
+# MOD 10 COUNTER:
+module mod_10(clk,rst,out);
+
+input clk,rst;
+
+output reg[3:0]out;
+
+always@(posedge clk)
+
+begin
+
+if(rst==1|out==9)
+
+out=4'b0;
+
+else
+
+out=out+1;
+
+end
+
+endmodule
+
+# UPDOWN COUNTER:
+module updown_counter(clk,rst,ud,out);
+
+input clk,rst,ud;
+
+output reg[3:0]out;
+
+always@(posedge clk) begin if(rst==1) out=4'b0; else if (ud==1) out=out+1;
+
+else if(ud==0) out=out-1;
+
+end endmodule
+
+# OUTPUT WAVEFORM:
+# SR FLIP FLOP:
+![image](https://github.com/Sanjay-E02/VLSI-LAB-EXP-4/assets/161813889/92adc46a-8fc8-4311-b678-0ec4af8230f2)
+
+# JK FLIP FLOP:
+![image](https://github.com/Sanjay-E02/VLSI-LAB-EXP-4/assets/161813889/4987d126-471b-4e6e-89e2-b971e63f34e4)
+
+# T FLIP FLOP:
+![image](https://github.com/Sanjay-E02/VLSI-LAB-EXP-4/assets/161813889/39f23041-08bc-403f-9643-31687108435a)
+
+# D FLIP FLOP:
+![image](https://github.com/Sanjay-E02/VLSI-LAB-EXP-4/assets/161813889/3173cb7f-9d50-449a-93ea-18735d0bf60b)
+
+# MOD 10 COUNTER:
+![image](https://github.com/Sanjay-E02/VLSI-LAB-EXP-4/assets/161813889/8202ebae-fd9b-435d-8ed2-34a2127ac55a)
+
+# UP DOWN COUNTER:
+![image](https://github.com/Sanjay-E02/VLSI-LAB-EXP-4/assets/161813889/09902136-3938-4d84-a486-ee2f16aae0e8)
+
+# RESULT:
+Thus the simulation of sequential circuits is done and outputs are verified successfully.
+
 
 
